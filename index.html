@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random Game By.PetTeddy</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#2c3e50">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="wheel-container">
+            <div class="wheel-arrow"></div>
+            <canvas id="wheel" width="400" height="400"></canvas>
+            <button id="spin-btn">หมุน!</button>
+        </div>
+        
+        <div class="controls">
+            <div class="players-section">
+                <h3>รายชื่อผู้เล่น</h3>
+                <input type="text" id="player-name" placeholder="ชื่อผู้เล่น">
+                <button id="add-player">เพิ่มผู้เล่น</button>
+                <ul id="players-list"></ul>
+            </div>
+            
+            <div class="punishment-section">
+                <h3>บทลงโทษ</h3>
+                <input type="text" id="punishment" placeholder="บทลงโทษ">
+                <button id="add-punishment">เพิ่มบทลงโทษ</button>
+                <ul id="punishment-list"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="result-modal">
+        <div class="modal-content">
+            <h2>ผลการสุ่ม! 🎉</h2>
+            <div class="result-text"></div>
+            <button class="close-modal">ตกลง</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

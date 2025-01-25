@@ -1,0 +1,443 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #e74c3c;
+    --background-color: #ecf0f1;
+    --text-color: #2c3e50;
+    --border-radius: 12px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Kanit', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+}
+
+.wheel-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.wheel-arrow {
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    width: 40px;
+    height: 40px;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.wheel-arrow::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 30px solid var(--secondary-color);
+}
+
+.wheel-arrow::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -5px;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background: var(--secondary-color);
+    border-radius: 50%;
+}
+
+#wheel {
+    width: 100%;
+    height: auto;
+    border: 3px solid var(--primary-color);
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+#spin-btn {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+}
+
+#spin-btn:hover {
+    background-color: #c0392b;
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+.controls {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.players-section, .punishment-section {
+    background: white;
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+input {
+    width: calc(100% - 120px);
+    padding: 12px;
+    margin-right: 10px;
+    border: 2px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+button {
+    padding: 12px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+li {
+    padding: 12px;
+    margin: 8px 0;
+    background-color: #f8f9fa;
+    border-radius: var(--border-radius);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+li button {
+    background-color: var(--secondary-color);
+    padding: 8px 12px;
+    font-size: 0.9rem;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    max-width: 90%;
+    width: 400px;
+    text-align: center;
+    position: relative;
+    animation: modalPop 0.3s ease;
+}
+
+@keyframes modalPop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.result-text {
+    font-size: 1.2rem;
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: var(--border-radius);
+    color: var(--text-color);
+}
+
+.close-modal {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding: 10px;
+    }
+
+    .wheel-container {
+        margin-bottom: 20px;
+        width: 90%;
+        max-width: 350px;
+    }
+
+    .wheel-arrow {
+        right: -30px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .wheel-arrow::before {
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+        border-right: 25px solid var(--secondary-color);
+    }
+
+    .controls {
+        width: 100%;
+        gap: 15px;
+    }
+
+    .players-section, .punishment-section {
+        padding: 15px;
+    }
+
+    h3 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 500px) {
+    body {
+        padding: 10px 5px;
+    }
+
+    .container {
+        padding: 5px;
+    }
+
+    .wheel-container {
+        width: 95%;
+        max-width: 300px;
+    }
+
+    .wheel-arrow {
+        right: -25px;
+    }
+
+    input {
+        width: 100%;
+        margin: 0 0 10px 0;
+        font-size: 16px; /* ป้องกัน iOS zoom */
+        padding: 10px;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px 15px;
+        font-size: 16px;
+    }
+
+    #spin-btn {
+        font-size: 1.2rem;
+        padding: 12px 24px;
+        width: auto;
+    }
+
+    .modal-content {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .modal h2 {
+        font-size: 1.5rem;
+    }
+
+    .result-text {
+        font-size: 1.1rem;
+        padding: 12px;
+    }
+
+    .close-modal {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    li {
+        padding: 10px;
+        font-size: 0.95rem;
+    }
+
+    li button {
+        width: auto;
+        padding: 6px 12px;
+        margin-left: 10px;
+    }
+}
+
+/* เพิ่ม safe area สำหรับ iPhone X ขึ้นไป */
+@supports (padding: max(0px)) {
+    body {
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
+        padding-bottom: max(20px, env(safe-area-inset-bottom));
+    }
+}
+
+/* ปรับปรุงการแสดงผลบน landscape mode */
+@media (max-height: 500px) and (orientation: landscape) {
+    .container {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .wheel-container {
+        max-width: 280px;
+        margin-bottom: 0;
+    }
+
+    .controls {
+        max-height: 90vh;
+        overflow-y: auto;
+        padding-right: 10px;
+    }
+
+    .modal-content {
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+}
+
+/* ปรับปรุง container และ wheel สำหรับหน้าจอใหญ่ */
+@media (min-width: 901px) {
+    .container {
+        gap: 50px;
+        align-items: flex-start;
+        padding: 30px;
+    }
+
+    .wheel-container {
+        position: sticky;
+        top: 30px;
+        flex-shrink: 0;
+        margin: 0;
+    }
+
+    .controls {
+        min-height: 100vh;
+        padding-bottom: 50px;
+    }
+
+    .players-section, .punishment-section {
+        position: relative;
+        padding: 30px;
+    }
+
+    /* ทำให้ scroll เฉพาะส่วน list */
+    #players-list, #punishment-list {
+        max-height: 50vh;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: var(--secondary-color) #f0f0f0;
+    }
+
+    #players-list::-webkit-scrollbar,
+    #punishment-list::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    #players-list::-webkit-scrollbar-track,
+    #punishment-list::-webkit-scrollbar-track {
+        background: #f0f0f0;
+        border-radius: 4px;
+    }
+
+    #players-list::-webkit-scrollbar-thumb,
+    #punishment-list::-webkit-scrollbar-thumb {
+        background-color: var(--secondary-color);
+        border-radius: 4px;
+    }
+}
