@@ -4,7 +4,7 @@ let spinning = false;
 
 const canvas = document.getElementById('wheel');
 const ctx = canvas.getContext('2d');
-
+// แอบมองโค้ดหรอครับ เม้นไว้เผื่อใครแอบอ่านเฉยๆ อิอิ By.PetTeddy
 // Event Listeners
 document.getElementById('add-player').addEventListener('click', addPlayer);
 document.getElementById('add-punishment').addEventListener('click', addPunishment);
