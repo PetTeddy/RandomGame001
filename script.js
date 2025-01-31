@@ -137,7 +137,7 @@ window.dispatchEvent(new Event('resize'));
 function showModal(winner, punishment) {
     const modal = document.getElementById('result-modal');
     const resultText = modal.querySelector('.result-text');
-    resultText.textContent = `${winner} ต้อง${punishment}!`;
+    resultText.textContent = `${winner} ต้อง ${punishment}!`;
     modal.classList.add('show');
     
     const closeBtn = modal.querySelector('.close-modal');
@@ -152,8 +152,41 @@ function showModal(winner, punishment) {
     });
 }
 
+function showNotification(message) {
+    const notification = document.getElementById('notification');
+    const notificationText = notification.querySelector('.notification-text');
+    notificationText.textContent = message;
+    notification.classList.add('show');
+    
+    const closeBtn = notification.querySelector('.notification-close');
+    const closeNotification = () => {
+        notification.classList.remove('show');
+        closeBtn.removeEventListener('click', closeNotification);
+    };
+    
+    closeBtn.addEventListener('click', closeNotification);
+    notification.addEventListener('click', (e) => {
+        if (e.target === notification) closeNotification();
+    });
+}
+
 function spinWheel() {
-    if (spinning || players.length === 0 || punishments.length === 0) return;
+    if (spinning) return;
+    
+    if (players.length === 0 && punishments.length === 0) {
+        showNotification('กรุณาเพิ่มรายชื่อผู้เล่นและบทลงโทษก่อนหมุน');
+        return;
+    }
+    
+    if (players.length === 0) {
+        showNotification('กรุณาเพิ่มรายชื่อผู้เล่นก่อนหมุน');
+        return;
+    }
+    
+    if (punishments.length === 0) {
+        showNotification('กรุณาเพิ่มบทลงโทษก่อนหมุน');
+        return;
+    }
     
     spinning = true;
     const spinBtn = document.getElementById('spin-btn');
